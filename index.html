@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TODO</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div id="body" class="body">
+		<nav class="body__nav">
+			<div class="body__nav-text">
+				TODO
+			</div>
+		</nav>
+		<div class="body__text">
+			<span class="body__text-task">Tasks</span>
+			<button v-on:click="toggleShowComplete()" class="body__text-button"><span v-if="!showComplete">Show</span><span v-else>Hide</span> Completed</button>
+			<button v-on:click="clearAll()" class="body__text-button">Clear All</button>
+		</div>
+		<div>
+		<div class="body__input" >
+			<form @keydown.enter.prevent="">
+			<input v-bind:class="{ active: new_todo }" v-on:keyup.enter="addItem" v-model="new_todo" placeholder="Enter here..." type="text" id="input">
+			<button v-bind:class="{ active: new_todo }"  @click="addItem" class="body__submit">+</button>
+			</form>
+		</div>
+		<div class="result">
+			<transition-group tag="ul" v-cloak name="todo-item" class="result__list">
+				<li v-for="(item, index) in n_completed" v-bind:key="item.title" class="result__result">
+					<input v-bind:id="'item_' + item.id" v-model="item.done" type="checkbox" >
+					<label v-bind:for="'item_' + item.id"></label>
+					<span v-cloak class="todo-text">{{ item.title }}</span>
+					<button class="delete" @click="deleteItem(item)">X</button>
+				</li>
+			</transition-group>
+				<transition-group v-if="showComplete" id="completed" tag="ul" v-cloak name="todo-item" class="result__list completed">
+					<li v-for="(item, index) in completed" v-bind:key="item.title" class="result__result ">
+						<input v-bind:id="'item_' + item.id" v-model="item.done" type="checkbox" >
+						<label v-bind:for="'item_' + item.id"></label>
+						<span v-cloak class="todo-text ">{{ item.title }}</span>
+						<button class="delete" @click="deleteItem(item)">X</button>
+					</li>
+				</transition-group>
+			</div>
+		</div>
+	</div>
+	<script src="js/vue-script.js"></script>
+	<script src="js/script.js"></script>
+</body>
+</html>
