@@ -22,7 +22,7 @@
 		<div class="body__input" >
 			<form @keydown.enter.prevent="">
 			<input v-bind:class="{ active: new_todo }" v-on:keyup.enter="addItem" v-model="new_todo" placeholder="Enter here..." type="text" id="input">
-			<button v-bind:class="{ active: new_todo }"  @click="addItem" class="body__submit">+</button>
+			<button type="button" v-bind:class="{ active: new_todo }"  @click="addItem" class="body__submit">+</button>
 			</form>
 		</div>
 		<div class="result">
