@@ -39,18 +39,27 @@ var first = new Vue ({
             }
         },
         addItem() {
+            var list = this.todoList;
+            var checked = true;
+            for ( i in list ){
+                if ( this.new_todo == list[i].title ) {
+                    alert(); 
+                    checked = false;
+                    break;
+                }
+            }
             // validation check
-            if (this.new_todo) {
+            if (this.new_todo && checked) {
               this.todoList.unshift({
                 id: this.todoList.length,
                 title: this.new_todo,
                 done: false,
               });
+              // reset new_todo
+              this.new_todo = '';
+              // save the new item in localstorage
+              return true;
             }
-            // reset new_todo
-            this.new_todo = '';
-            // save the new item in localstorage
-            return true;
         },
         deleteItem(item) {
             this.todoList.splice(this.todoList.indexOf(item), 1);
