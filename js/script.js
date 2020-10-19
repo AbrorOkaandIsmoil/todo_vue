@@ -42,7 +42,7 @@ var first = new Vue ({
             var list = this.todoList;
             var checked = true;
             for ( i in list ){
-                if ( this.new_todo == list[i].title ) {
+                if ( this.new_todo == list[i].title && !list[i].done) {
                     alert("You entered existing task!"); 
                     checked = false;
                     break;
