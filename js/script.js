@@ -40,19 +40,20 @@ var first = new Vue ({
         },
         addItem() {
             var list = this.todoList;
+            var trimed = this.new_todo.trim();
             var checked = true;
             for ( i in list ){
-                if ( this.new_todo == list[i].title && !list[i].done) {
+                if ( trimed == list[i].title && !list[i].done) {
                     alert("You entered existing task!"); 
                     checked = false;
                     break;
                 }
             }
             // validation check
-            if (this.new_todo && checked) {
+            if (trimed && checked) {
               this.todoList.unshift({
                 id: this.todoList.length,
-                title: this.new_todo,
+                title: trimed,
                 done: false,
               });
               // reset new_todo
